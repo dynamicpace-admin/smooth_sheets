@@ -14,6 +14,8 @@ import '../scrollable/scrollable_sheet_extent.dart';
 import '../scrollable/scrollable_sheet_extent_scope.dart';
 import 'navigation_route.dart';
 
+const _cupertinoBarrierColor = Color(0x18000000);
+
 class _ScrollableNavigationSheetRouteContent extends StatelessWidget {
   const _ScrollableNavigationSheetRouteContent({
     this.debugLabel,
@@ -219,6 +221,7 @@ class ScrollableNavigationSheetPage<T> extends Page<T> {
     this.maxExtent = const Extent.proportional(1),
     this.physics,
     this.transitionsBuilder,
+    this.barrierColor = _cupertinoBarrierColor,
     required this.child,
   });
 
@@ -230,6 +233,7 @@ class ScrollableNavigationSheetPage<T> extends Page<T> {
   final Extent initialExtent;
   final Extent minExtent;
   final Extent maxExtent;
+  final Color? barrierColor;
 
   final SheetPhysics? physics;
 
@@ -261,6 +265,9 @@ class _PageBasedScrollableNavigationSheetRoute<T>
 
   @override
   RouteTransitionsBuilder? get transitionsBuilder => page.transitionsBuilder;
+
+  @override
+  Color? get barrierColor => page.barrierColor;
 
   @override
   SheetExtentScopeKey<ScrollableSheetExtent> createScopeKey() {
